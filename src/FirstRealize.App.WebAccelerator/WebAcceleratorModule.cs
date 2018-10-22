@@ -1,5 +1,4 @@
-﻿using FirstRealize.App.WebAccelerator.Caching;
-using FirstRealize.App.WebAccelerator.Handlers;
+﻿using FirstRealize.App.WebAccelerator.Handlers;
 using System;
 using System.Web;
 
@@ -8,15 +7,12 @@ namespace FirstRealize.App.WebAccelerator
     public class WebAcceleratorModule : IHttpModule
     {
         private readonly TimeSpan _timeout;
-        private readonly ICache _cache;
-        private readonly HttpContextHandler _httpContextHandler;
+        private readonly WebAcceleratorHandler _httpContextHandler;
 
         public WebAcceleratorModule()
         {
             _timeout = TimeSpan.FromSeconds(60);
-            _cache = HttpRuntimeCache.Current;
-            _httpContextHandler = new HttpContextHandler(
-                _cache);
+            _httpContextHandler = WebAcceleratorHandler.Current;
         }
 
         public void Dispose()
@@ -40,7 +36,7 @@ namespace FirstRealize.App.WebAccelerator
         {
             HttpContext context = ((HttpApplication)sender).Context;
             _httpContextHandler
-                .AddResponseToCache(context, _cache, _timeout);
+                .AddResponseToCache(context, _timeout);
         }
     }
 }

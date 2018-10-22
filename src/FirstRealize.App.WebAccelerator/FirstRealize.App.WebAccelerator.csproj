@@ -44,10 +44,13 @@
     <Compile Include="Caching\ICache.cs" />
     <Compile Include="Caching\HttpRuntimeCache.cs" />
     <Compile Include="Filters\CacheContentFilter.cs" />
-    <Compile Include="Handlers\HttpContextHandler.cs" />
+    <Compile Include="Handlers\WebAcceleratorHandler.cs" />
     <Compile Include="Models\ResponseCache.cs" />
     <Compile Include="WebAcceleratorModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
