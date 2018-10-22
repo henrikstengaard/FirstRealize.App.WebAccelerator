@@ -46,11 +46,9 @@
     <Compile Include="Filters\CacheContentFilter.cs" />
     <Compile Include="Handlers\WebAcceleratorHandler.cs" />
     <Compile Include="Models\ResponseCache.cs" />
-    <Compile Include="WebAcceleratorModule.cs" />
+    <Compile Include="Modules\WebAcceleratorModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

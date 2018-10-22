@@ -2,7 +2,7 @@
 using System;
 using System.Web;
 
-namespace FirstRealize.App.WebAccelerator
+namespace FirstRealize.App.WebAccelerator.Modules
 {
     public class WebAcceleratorModule : IHttpModule
     {
