@@ -17,11 +17,19 @@ namespace FirstRealize.App.WebAccelerator.Handlers
             }, true);
 
         private readonly ICache _cache;
+        private readonly IList<string> _contentTypes;
 
         public WebAcceleratorHandler(
             ICache cache)
         {
             _cache = cache;
+            _contentTypes = new[]
+            {
+                "text/html",
+                "application/javascript",
+                "text/css",
+                "image/"
+            };
         }
 
         public static WebAcceleratorHandler Current
@@ -39,7 +47,7 @@ namespace FirstRealize.App.WebAccelerator.Handlers
 
             var responseCache = HttpRuntime.Cache.Get(cacheKey) as ResponseCache;
 
-            // add cache content filter, if response is not cached
+            // add cache content filter and return, if response is not cached
             if (responseCache == null)
             {
                 context.Response.Filter =
@@ -63,17 +71,17 @@ namespace FirstRealize.App.WebAccelerator.Handlers
             // add response cache to response and end/return response
             context.Response.Headers.Add(
                 responseCache.Headers);
-            context.Response.ContentType = 
+            context.Response.ContentType =
                 responseCache.ContentType;
-            context.Response.Charset = 
+            context.Response.Charset =
                 responseCache.Charset;
-            context.Response.ContentEncoding = 
+            context.Response.ContentEncoding =
                 responseCache.ContentEncoding;
             context.Response.OutputStream.Write(
                 responseCache.Content, 0, responseCache.Content.Length);
-            context.Response.StatusCode = 
+            context.Response.StatusCode =
                 responseCache.StatusCode;
-            context.Response.StatusDescription = 
+            context.Response.StatusDescription =
                 responseCache.StatusDescription;
             context.Response.End();
         }
@@ -82,6 +90,12 @@ namespace FirstRealize.App.WebAccelerator.Handlers
             HttpContext context,
             TimeSpan timeout)
         {
+            // return, if response content type is not defined
+            if (!_contentTypes.Contains(context.Response.ContentType.ToLower()))
+            {
+                return;
+            }
+
             // get cache key
             var cacheKey = context.Request.Url.AbsoluteUri;
 
