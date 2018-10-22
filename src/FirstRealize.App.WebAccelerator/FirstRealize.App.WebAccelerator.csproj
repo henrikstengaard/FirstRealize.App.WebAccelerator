@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Caching\ICache.cs" />
     <Compile Include="Caching\HttpRuntimeCache.cs" />
+    <Compile Include="Configuration\ContentTypeElement.cs" />
+    <Compile Include="Configuration\WebAcceleratorSection.cs" />
     <Compile Include="Filters\CacheContentFilter.cs" />
     <Compile Include="Handlers\WebAcceleratorHandler.cs" />
     <Compile Include="Models\ResponseCache.cs" />
